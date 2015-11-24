@@ -82,6 +82,12 @@ class SoundBoardController implements Initializable {
 			addSongDialog.show()
 		}
 	}
+	
+	@FXML def deleteSongHandle() {
+		if (currentSelectionSong != null) {
+			songList.remove(currentSelectionSong)
+		}
+	}
 
 	def onTableDoubleClick() {
 		editSongHandle()
