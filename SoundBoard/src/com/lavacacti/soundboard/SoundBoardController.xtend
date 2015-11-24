@@ -35,6 +35,7 @@ class SoundBoardController implements Initializable {
 	
 	var ObservableList<Song> songList
 	var FXMLLoader loader
+	var SongDialogController ctrl
 	var Stage addSongDialog
 	
 	override initialize(URL location, ResourceBundle resources) {
@@ -47,7 +48,7 @@ class SoundBoardController implements Initializable {
 		)
 		addSongDialog = new Stage()
 		addSongDialog.scene = new Scene(loader.load())
-		val SongDialogController ctrl = loader.controller;
+		ctrl = loader.controller;
 		ctrl.songList = songList
 	}
 	

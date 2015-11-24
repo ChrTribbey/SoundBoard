@@ -8,9 +8,9 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavacacti.soundboard.SongDialogController">
    <children>
       <Label text="Drop file here or enter path." />
-      <TextField text="Empty" />
+      <TextField fx:id="songPath" text="Empty" />
       <Label text="Name" />
-      <TextField />
+      <TextField fx:id="songName" />
       <Label text="Current bind: none" />
       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="350.0" text="Bind Key" />
       <Button mnemonicParsing="false" onAction="#save" prefWidth="350.0" text="Save" />
