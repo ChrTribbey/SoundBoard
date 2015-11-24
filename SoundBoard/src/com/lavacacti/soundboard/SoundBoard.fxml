@@ -18,7 +18,7 @@
       <Label text="Press Escape to cancel all sounds" />
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="addSongButton" mnemonicParsing="false" text="Add Sound" />
+            <Button fx:id="addSongButton" mnemonicParsing="false" onAction="#addSongHandle" text="Add Sound" />
             <Button fx:id="deleteSongButton" mnemonicParsing="false" text="Delete Sound" />
             <Button fx:id="editOutputButton" mnemonicParsing="false" text="Edit Output" />
             <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />

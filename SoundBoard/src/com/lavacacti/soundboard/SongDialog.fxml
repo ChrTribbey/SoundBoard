@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavacacti.soundboard.SongDialogController">
+   <children>
+      <Label text="Drop file here or enter path." />
+      <TextField text="Empty" />
+      <Label text="Name" />
+      <TextField />
+      <Label text="Current bind: none" />
+      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="350.0" text="Bind Key" />
+      <Button mnemonicParsing="false" onAction="#save" prefWidth="350.0" text="Save" />
+   </children>
+</VBox>

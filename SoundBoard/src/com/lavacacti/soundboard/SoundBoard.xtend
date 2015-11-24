@@ -8,20 +8,18 @@ import javafx.scene.layout.Pane
 import javafx.stage.Stage
 
 class SoundBoard extends Application {
+	
 	def static void main(String[] args) {
 		launch(args)
 	}
 	
     override start(Stage primaryStage) {
         primaryStage.setTitle("Hello World!");
-        var Pane root = FXMLLoader.load(getClass().getResource("SoundBoard.fxml"))
-        primaryStage.setScene(new Scene(root))
+        var loader = new FXMLLoader(
+        	getClass().getResource("SoundBoard.fxml")
+        )
+        primaryStage.setScene = new Scene(loader.load())
         primaryStage.show();
         primaryStage.resizable = false;
     }
-    
-    @FXML def handle(){
-    	
-    }
-	
 }
