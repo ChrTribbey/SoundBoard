@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavacacti.soundboard.SoundBoardController">
+   <children>
+      <TableView fx:id="songTable" prefHeight="450.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="372.0" sortable="false" text="Name" />
+          <TableColumn editable="false" prefWidth="107.0" sortable="false" text="Binding" />
+        </columns>
+      </TableView>
+      <Label text="Volume Control" />
+      <Slider />
+      <Label text="Press Escape to cancel all sounds" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="addSongButton" mnemonicParsing="false" text="Add Sound" />
+            <Button fx:id="deleteSongButton" mnemonicParsing="false" text="Delete Sound" />
+            <Button fx:id="editOutputButton" mnemonicParsing="false" text="Edit Output" />
+            <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
+            <Button fx:id="loadButton" mnemonicParsing="false" text="Load" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
