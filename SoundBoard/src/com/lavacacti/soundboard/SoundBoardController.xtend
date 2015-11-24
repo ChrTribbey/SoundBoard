@@ -6,6 +6,7 @@ import java.util.ResourceBundle
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.TableView
+import javafx.scene.control.TableColumn
 
 class SoundBoardController implements Initializable {
 	
@@ -21,6 +22,10 @@ class SoundBoardController implements Initializable {
 	var Button loadButton
 	@FXML
 	var TableView songTable
+	@FXML
+	var TableColumn songNameColumn
+	@FXML
+	var TableColumn songBindingColumn
 	
 	override initialize(URL location, ResourceBundle resources) {
 	}

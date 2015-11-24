@@ -9,8 +9,8 @@
    <children>
       <TableView fx:id="songTable" prefHeight="450.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="277.0" sortable="false" text="Name" />
-          <TableColumn editable="false" prefWidth="126.0" resizable="false" sortable="false" text="Binding" />
+          <TableColumn fx:id="songNameColumn" prefWidth="277.0" sortable="false" text="Name" />
+          <TableColumn fx:id="songBindingColumn" editable="false" prefWidth="126.0" resizable="false" sortable="false" text="Binding" />
         </columns>
       </TableView>
       <Label text="Volume Control" />
