@@ -19,7 +19,7 @@ class SoundBoard extends Application {
     override start(Stage primaryStage) {
         primaryStage.setTitle("Hello World!");
         var Pane root = FXMLLoader.load(getClass().getResource("SoundBoard.fxml"))
-        primaryStage.setScene(new Scene(root, 400, root.minHeight));
+        primaryStage.setScene(new Scene(root))
         primaryStage.show();
         primaryStage.resizable = false;
     }

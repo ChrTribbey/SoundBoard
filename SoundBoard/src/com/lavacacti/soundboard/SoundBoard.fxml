@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavacacti.soundboard.SoundBoardController">
+<VBox maxHeight="-Infinity" maxWidth="400" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavacacti.soundboard.SoundBoardController">
    <children>
       <TableView fx:id="songTable" prefHeight="450.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="372.0" sortable="false" text="Name" />
-          <TableColumn editable="false" prefWidth="107.0" sortable="false" text="Binding" />
+          <TableColumn prefWidth="277.0" sortable="false" text="Name" />
+          <TableColumn editable="false" prefWidth="126.0" resizable="false" sortable="false" text="Binding" />
         </columns>
       </TableView>
       <Label text="Volume Control" />
