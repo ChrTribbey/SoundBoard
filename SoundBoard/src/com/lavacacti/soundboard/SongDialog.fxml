@@ -10,7 +10,7 @@
       <Label text="Drop file here or enter path." />
       <TextField fx:id="songPath" text="Empty" />
       <Label text="Name" />
-      <TextField fx:id="songName" />
+      <TextField fx:id="songName" text="Empty" />
       <Label text="Current bind: none" />
       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="350.0" text="Bind Key" />
       <Button mnemonicParsing="false" onAction="#save" prefWidth="350.0" text="Save" />

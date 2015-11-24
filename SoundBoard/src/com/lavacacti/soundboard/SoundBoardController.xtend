@@ -13,18 +13,22 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.stage.Stage
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
+import javafx.scene.input.MouseEvent
+import javafx.event.EventHandler
+import javafx.beans.value.ObservableValue
+import javafx.beans.value.ChangeListener
 
 class SoundBoardController implements Initializable {
-	
-	@FXML 
+
+	@FXML
 	var Button addSongButton
-	@FXML 
+	@FXML
 	var Button deleteSongButton
-	@FXML 
+	@FXML
 	var Button editOutputButton
-	@FXML 
+	@FXML
 	var Button saveButton
-	@FXML 
+	@FXML
 	var Button loadButton
 	@FXML
 	var TableView songTable
@@ -32,17 +36,31 @@ class SoundBoardController implements Initializable {
 	var TableColumn songNameColumn
 	@FXML
 	var TableColumn songBindingColumn
-	
+
 	var ObservableList<Song> songList
 	var FXMLLoader loader
 	var SongDialogController ctrl
 	var Stage addSongDialog
-	
+	var Song currentSelectionSong
+
 	override initialize(URL location, ResourceBundle resources) {
 		songNameColumn.cellValueFactory = new PropertyValueFactory("name")
 		songBindingColumn.cellValueFactory = new PropertyValueFactory("keyCode")
 		songList = FXCollections.observableArrayList
 		songTable.items = songList
+		songTable.onMouseClicked = new EventHandler<MouseEvent>() {
+			override handle(MouseEvent arg0) {
+				if (arg0.clickCount >= 2) {
+					onTableDoubleClick()
+				}
+			}
+		}
+		songTable.selectionModel.selectedItemProperty.addListener(new ChangeListener {
+			override changed(ObservableValue arg0, Object arg1, Object arg2) {
+				currentSelectionSong = arg2 as Song
+			}
+		})
+
 		loader = new FXMLLoader(
 			getClass().getResource("SongDialog.fxml")
 		)
@@ -51,9 +69,21 @@ class SoundBoardController implements Initializable {
 		ctrl = loader.controller;
 		ctrl.songList = songList
 	}
-	
+
 	@FXML def addSongHandle() {
+		addSongDialog.title = "Add new song"
 		addSongDialog.show()
 	}
-	
+
+	@FXML def editSongHandle() {
+		if (currentSelectionSong != null) {
+			addSongDialog.title = "Edit song"
+			ctrl.edit(currentSelectionSong)
+			addSongDialog.show()
+		}
+	}
+
+	def onTableDoubleClick() {
+		editSongHandle()
+	}
 }
