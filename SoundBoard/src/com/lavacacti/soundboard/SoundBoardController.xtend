@@ -39,7 +39,7 @@ class SoundBoardController implements Initializable {
 
 	var ObservableList<Song> songList
 	var FXMLLoader loader
-	var SongDialogController ctrl
+	var SongDialogController soundDialogController
 	var Stage addSongDialog
 	var Song currentSelectionSong
 
@@ -66,8 +66,8 @@ class SoundBoardController implements Initializable {
 		)
 		addSongDialog = new Stage()
 		addSongDialog.scene = new Scene(loader.load())
-		ctrl = loader.controller;
-		ctrl.songList = songList
+		soundDialogController = loader.controller
+		soundDialogController.songList = songList
 	}
 
 	@FXML def addSongHandle() {
@@ -78,7 +78,7 @@ class SoundBoardController implements Initializable {
 	@FXML def editSongHandle() {
 		if (currentSelectionSong != null) {
 			addSongDialog.title = "Edit song"
-			ctrl.edit(currentSelectionSong)
+			soundDialogController.edit(currentSelectionSong)
 			addSongDialog.show()
 		}
 	}
