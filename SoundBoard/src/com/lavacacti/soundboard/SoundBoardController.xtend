@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent
 import javafx.event.EventHandler
 import javafx.beans.value.ObservableValue
 import javafx.beans.value.ChangeListener
+import java.nio.file.Paths
 
 class SoundBoardController implements Initializable {
 
@@ -42,8 +43,10 @@ class SoundBoardController implements Initializable {
 	var SongDialogController soundDialogController
 	var Stage addSongDialog
 	var Song currentSelectionSong
+	var SoundManager sManager
 
 	override initialize(URL location, ResourceBundle resources) {
+		sManager = new SoundManager()
 		songNameColumn.cellValueFactory = new PropertyValueFactory("name")
 		songBindingColumn.cellValueFactory = new PropertyValueFactory("keyCode")
 		songList = FXCollections.observableArrayList
