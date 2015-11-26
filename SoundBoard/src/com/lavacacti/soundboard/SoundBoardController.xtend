@@ -18,6 +18,9 @@ import javafx.event.EventHandler
 import javafx.beans.value.ObservableValue
 import javafx.beans.value.ChangeListener
 import java.nio.file.Paths
+import org.jnativehook.GlobalScreen
+import java.util.logging.Logger
+import java.util.logging.Level
 
 class SoundBoardController implements Initializable {
 
@@ -46,6 +49,7 @@ class SoundBoardController implements Initializable {
 	var SoundManager sManager
 	var Stage outputSelectorDialog
 	var OutputSelectorController outputSelectorController
+	var KeyHandler keyHandler
 
 	override initialize(URL location, ResourceBundle resources) {
 		sManager = new SoundManager()
@@ -81,6 +85,14 @@ class SoundBoardController implements Initializable {
 		outputSelectorDialog.scene = new Scene(loader.load())
 		outputSelectorController = loader.controller
 		outputSelectorController.init(sManager)
+		
+		var logger = Logger.getLogger(GlobalScreen.getPackage().getName());
+        logger.setLevel(Level.OFF);
+		keyHandler = new KeyHandler(songList, sManager)
+		GlobalScreen.registerNativeHook()
+		GlobalScreen.addNativeKeyListener(keyHandler)
+
+
 	}
 
 	@FXML def addSongHandle() {
