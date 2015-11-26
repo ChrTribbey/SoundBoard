@@ -67,7 +67,6 @@ class SoundManager {
 	def watchList() {
 		val removalList = new ArrayList()
 		for (music : playList) {
-			println(music.playing)
 			if (!music.playing) {
 				removalList.add(music)
 				music.unload()

@@ -26,7 +26,6 @@ class KeyHandler implements NativeKeyListener {
 		]
 		if (ke.keyCode == NativeKeyEvent.VC_ESCAPE) {
 			sManager.stopAllSounds
-			println("stop")
 		}
 	}
 

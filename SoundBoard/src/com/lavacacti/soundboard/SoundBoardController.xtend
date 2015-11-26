@@ -119,6 +119,7 @@ class SoundBoardController implements Initializable {
 
 	@FXML def addSongHandle() {
 		addSongDialog.title = "Add new song"
+		addSongDialog.sizeToScene()
 		addSongDialog.show()
 	}
 
@@ -126,6 +127,7 @@ class SoundBoardController implements Initializable {
 		if (currentSelectionSong != null) {
 			addSongDialog.title = "Edit song"
 			soundDialogController.edit(currentSelectionSong)
+			addSongDialog.sizeToScene()
 			addSongDialog.show()
 		}
 	}
@@ -141,6 +143,7 @@ class SoundBoardController implements Initializable {
 	}
 
 	@FXML def editOutput() {
+		outputSelectorDialog.sizeToScene()
 		outputSelectorDialog.show()
 	}
 
