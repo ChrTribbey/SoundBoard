@@ -8,7 +8,7 @@
 <VBox onKeyPressed="#onKeyPress" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavacacti.soundboard.SongDialogController">
    <children>
       <Label text="Drop file here or enter path." />
-      <TextField fx:id="songPath" text="Empty" />
+      <TextField fx:id="songPath" onDragDropped="#onDragDropped" onDragOver="#onDragOver" text="Empty" />
       <Label text="Name" />
       <TextField fx:id="songName" text="Empty" />
       <Label fx:id="bindLabel" text="Current bind: none" />

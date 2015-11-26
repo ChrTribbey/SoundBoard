@@ -10,6 +10,11 @@ import javafx.fxml.FXML
 import javafx.scene.control.TextField
 import javafx.scene.input.KeyEvent
 import javafx.scene.control.Label
+import javafx.scene.input.MouseEvent
+import javafx.event.Event
+import javafx.event.EventHandler
+import javafx.scene.input.DragEvent
+import javafx.scene.input.TransferMode
 
 class SongDialogController implements Initializable {
 	@Accessors ObservableList songList
@@ -68,5 +73,26 @@ class SongDialogController implements Initializable {
 	
 	def updateBindingLabel() {
 		bindLabel.text = "Current bind: " + keyCode
+	}
+	
+	@FXML def onDragOver(DragEvent e) {
+		val db = e.dragboard
+		if (db.hasFiles()) {
+			e.acceptTransferModes(TransferMode.LINK)
+			e.consume()
+		} else {
+			e.consume()
+		}
+	}
+	
+	@FXML def onDragDropped(DragEvent e) {
+		val db = e.dragboard
+		if (db.hasFiles()) {
+			db.files.forEach[file |
+				songPath.text = file.absolutePath
+			]
+		}
+		e.dropCompleted = true
+		e.consume()
 	}
 }
