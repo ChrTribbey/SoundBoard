@@ -60,7 +60,7 @@ class SongDialogController implements Initializable {
 
 	@FXML def onKeyPress(KeyEvent e) {
 		if (isListen) {
-			keyCode = e.code.toString
+			keyCode = e.code.getName
 			updateBindingLabel()
 			isListen = false
 		}

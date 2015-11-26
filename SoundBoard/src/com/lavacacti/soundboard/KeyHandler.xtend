@@ -3,6 +3,7 @@ package com.lavacacti.soundboard
 import org.jnativehook.keyboard.NativeKeyListener
 import org.jnativehook.keyboard.NativeKeyEvent
 import javafx.collections.ObservableList
+import javafx.scene.input.KeyCode
 
 class KeyHandler implements NativeKeyListener {
 
@@ -15,17 +16,17 @@ class KeyHandler implements NativeKeyListener {
 	}
 
 	override nativeKeyReleased(NativeKeyEvent ke) {
-		val key = NativeKeyEvent.getKeyText(ke.getKeyCode()).toLowerCase()
 		songList.forEach [ song |
 			if (song.keyCode != null) {
-				val cKey = song.keyCode.toLowerCase()
-				if (key.contains(cKey)) {
+				val cKey = KeyCode.getKeyCode(song.keyCode).impl_getCode
+				if (ke.rawCode == cKey) {
 					sManager.playSound(song.path)
 				}
 			}
 		]
-		if (key.contains("escape")) {
+		if (ke.keyCode == NativeKeyEvent.VC_ESCAPE) {
 			sManager.stopAllSounds
+			println("stop")
 		}
 	}
 
