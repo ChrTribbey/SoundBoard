@@ -19,7 +19,7 @@ class SoundBoard extends Application {
 	}
 	
     override start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Soundboard - Cactus Equinox");
         var loader = new FXMLLoader(
         	getClass().getResource("SoundBoard.fxml")
         )
