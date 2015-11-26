@@ -21,6 +21,14 @@ import java.nio.file.Paths
 import org.jnativehook.GlobalScreen
 import java.util.logging.Logger
 import java.util.logging.Level
+import java.util.ArrayList
+import java.io.FileOutputStream
+import java.io.ObjectOutputStream
+import java.io.FileInputStream
+import java.io.ObjectInputStream
+import java.io.FileNotFoundException
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 
 class SoundBoardController implements Initializable {
 
@@ -120,5 +128,30 @@ class SoundBoardController implements Initializable {
 	
 	@FXML def editOutput() {
 		outputSelectorDialog.show()
+	}
+	
+	@FXML def save() {
+		val fos = new FileOutputStream("list.dat")
+		val oos = new ObjectOutputStream(fos)
+		oos.writeObject(songList.toArray())
+		oos.close()
+	}
+	
+	@FXML def load() {
+		songList.clear()
+		val FileInputStream fis = try {
+			new FileInputStream("list.dat")
+		} catch (FileNotFoundException e) {
+			new Alert(AlertType.ERROR, "Save file does not exist").show()
+			return
+		}
+			
+		val ois = new ObjectInputStream(fis)
+		val Object[] list = ois.readObject() as Object[]
+		list.forEach[obj |
+			val s = obj as Song
+			songList.add(s)
+		]
+		ois.close()
 	}
 }
