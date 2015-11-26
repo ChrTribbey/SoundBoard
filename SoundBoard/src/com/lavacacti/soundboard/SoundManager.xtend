@@ -12,14 +12,17 @@ import javafx.util.Duration
 import javafx.animation.KeyFrame
 import javafx.animation.Animation
 import java.nio.file.Paths
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
+import javafx.application.Platform
 
 class SoundManager {
 	var Mixer.Info mixer
 	var List<Music> playList
 	var Timeline timeLine
-	
+
 	new() {
-		supportedMixers.forEach[mix |
+		supportedMixers.forEach [ mix |
 			if (mix.name.contains("Virtual Audio Cable"))
 				mixer = mix
 		]
@@ -32,7 +35,7 @@ class SoundManager {
 		timeLine.cycleCount = Animation.INDEFINITE
 		timeLine.play()
 	}
-	
+
 	def getSupportedMixers() {
 		val list = new ArrayList<Mixer.Info>()
 		for (mInfo : AudioSystem.mixerInfo) {
@@ -41,30 +44,34 @@ class SoundManager {
 		}
 		return list
 	}
-	
+
 	def changeMixer(Mixer.Info mixer) {
 		TinySound.shutdown()
 		TinySound.init(mixer)
 	}
-	
+
 	def playSound(String path) {
-		var music = TinySound.loadMusic(Paths.get(path).toFile)
-		playList.add(music)
-		music.play(false)
+		if (Paths.get(path).toFile.exists) {
+			val music = TinySound.loadMusic(Paths.get(path).toFile)
+			playList.add(music)
+			music.play(false)
+		} else {
+			Platform.runLater([new Alert(AlertType.ERROR, "File does not exist: " + path).show()]) //Make sure its called on the FX thread
+		}
 	}
-	
+
 	def watchList() {
 		val removalList = new ArrayList()
 		for (music : playList) {
-			if(!music.playing) {
+			if (!music.playing) {
 				removalList.add(music)
 			}
 		}
-		removalList.forEach[music | playList.remove(music)]
+		removalList.forEach[music|playList.remove(music)]
 	}
-	
+
 	def stopAllSounds() {
-		playList.forEach[music |
+		playList.forEach [ music |
 			if (music.playing)
 				music.stop
 		]
