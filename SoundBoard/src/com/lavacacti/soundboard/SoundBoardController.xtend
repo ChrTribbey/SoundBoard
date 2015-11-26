@@ -29,6 +29,9 @@ import java.io.ObjectInputStream
 import java.io.FileNotFoundException
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
+import javafx.stage.WindowEvent
+import kuusisto.tinysound.TinySound
+import javafx.application.Platform
 
 class SoundBoardController implements Initializable {
 

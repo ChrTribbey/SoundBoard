@@ -6,6 +6,11 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
+import javafx.event.EventHandler
+import javafx.stage.WindowEvent
+import kuusisto.tinysound.TinySound
+import org.jnativehook.GlobalScreen
+import javafx.application.Platform
 
 class SoundBoard extends Application {
 	
@@ -21,5 +26,12 @@ class SoundBoard extends Application {
         primaryStage.setScene = new Scene(loader.load())
         primaryStage.show();
         primaryStage.resizable = false;
+        primaryStage.onCloseRequest = new EventHandler<WindowEvent> {
+			override handle(WindowEvent arg0) {
+				TinySound.shutdown()
+				GlobalScreen.unregisterNativeHook()
+				Platform.exit()
+			}	
+		}
     }
 }
