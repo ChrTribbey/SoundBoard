@@ -31,9 +31,9 @@ class SongDialogController implements Initializable {
 	@FXML def save() {
 		if (song != null) {
 			val index = songList.indexOf(song);
-			songList.set(index, new Song(id, songName.getText(), songPath.getText(), keyCode, 0, false, false))
+			songList.set(index, new Song(id, songName.getText(), songPath.getText(), keyCode, 100, false, false))
 		} else {
-			songList.add(new Song(UUID.randomUUID(), songName.getText(), songPath.getText(), keyCode, 0, false, false))
+			songList.add(new Song(UUID.randomUUID(), songName.getText(), songPath.getText(), keyCode, 100, false, false))
 		}
 		songPath.text = "Empty"
 		songName.text = "Empty"
