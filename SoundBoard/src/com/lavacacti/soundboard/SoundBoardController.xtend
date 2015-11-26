@@ -44,6 +44,8 @@ class SoundBoardController implements Initializable {
 	var Stage addSongDialog
 	var Song currentSelectionSong
 	var SoundManager sManager
+	var Stage outputSelectorDialog
+	var OutputSelectorController outputSelectorController
 
 	override initialize(URL location, ResourceBundle resources) {
 		sManager = new SoundManager()
@@ -71,6 +73,14 @@ class SoundBoardController implements Initializable {
 		addSongDialog.scene = new Scene(loader.load())
 		soundDialogController = loader.controller
 		soundDialogController.songList = songList
+		
+		loader = new FXMLLoader(
+			getClass().getResource("OutputSelector.fxml")
+		)
+		outputSelectorDialog = new Stage()
+		outputSelectorDialog.scene = new Scene(loader.load())
+		outputSelectorController = loader.controller
+		outputSelectorController.init(sManager)
 	}
 
 	@FXML def addSongHandle() {
@@ -94,5 +104,9 @@ class SoundBoardController implements Initializable {
 
 	def onTableDoubleClick() {
 		editSongHandle()
+	}
+	
+	@FXML def editOutput() {
+		outputSelectorDialog.show()
 	}
 }

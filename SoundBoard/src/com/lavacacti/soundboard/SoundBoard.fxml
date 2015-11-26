@@ -20,7 +20,7 @@
          <children>
             <Button fx:id="addSongButton" mnemonicParsing="false" onAction="#addSongHandle" text="Add Sound" />
             <Button fx:id="deleteSongButton" mnemonicParsing="false" onAction="#deleteSongHandle" text="Delete Sound" />
-            <Button fx:id="editOutputButton" mnemonicParsing="false" text="Edit Output" />
+            <Button fx:id="editOutputButton" mnemonicParsing="false" onAction="#editOutput" text="Edit Output" />
             <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
             <Button fx:id="loadButton" mnemonicParsing="false" text="Load" />
          </children>
