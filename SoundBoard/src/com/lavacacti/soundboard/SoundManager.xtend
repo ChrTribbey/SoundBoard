@@ -53,10 +53,14 @@ class SoundManager {
 	def playSound(String path) {
 		if (Paths.get(path).toFile.exists) {
 			val music = TinySound.loadMusic(Paths.get(path).toFile)
-			playList.add(music)
-			music.play(false)
+			if (music != null) {
+				playList.add(music)
+				music.play(false)
+			} else {
+				Platform.runLater([new Alert(AlertType.ERROR, "Unsupported song " + path).show()]) // Make sure its called on the FX thread
+			}
 		} else {
-			Platform.runLater([new Alert(AlertType.ERROR, "File does not exist: " + path).show()]) //Make sure its called on the FX thread
+			Platform.runLater([new Alert(AlertType.ERROR, "File does not exist: " + path).show()]) // Make sure its called on the FX thread
 		}
 	}
 
