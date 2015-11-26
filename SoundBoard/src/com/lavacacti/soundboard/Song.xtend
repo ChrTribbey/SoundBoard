@@ -2,8 +2,9 @@ package com.lavacacti.soundboard
 
 import java.util.UUID
 import org.eclipse.xtend.lib.annotations.Data
+import java.io.Serializable
 
-@Data class Song {
+@Data class Song implements Serializable {
 	UUID id
 	String name
 	String path
