@@ -67,17 +67,22 @@ class SoundManager {
 	def watchList() {
 		val removalList = new ArrayList()
 		for (music : playList) {
+			println(music.playing)
 			if (!music.playing) {
 				removalList.add(music)
+				music.unload()
 			}
 		}
 		removalList.forEach[music|playList.remove(music)]
+		System.gc()
 	}
 
 	def stopAllSounds() {
 		playList.forEach [ music |
-			if (music.playing)
-				music.stop
+			if (music.playing) {
+				music.stop()
+				music.unload()
+			}
 		]
 		playList.clear()
 	}
