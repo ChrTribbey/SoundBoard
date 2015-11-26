@@ -32,6 +32,7 @@ import javafx.scene.control.Alert.AlertType
 import javafx.stage.WindowEvent
 import kuusisto.tinysound.TinySound
 import javafx.application.Platform
+import javafx.scene.control.Slider
 
 class SoundBoardController implements Initializable {
 
@@ -51,6 +52,8 @@ class SoundBoardController implements Initializable {
 	var TableColumn songNameColumn
 	@FXML
 	var TableColumn songBindingColumn
+	@FXML
+	var Slider slider
 
 	var ObservableList<Song> songList
 	var FXMLLoader loader
@@ -88,7 +91,7 @@ class SoundBoardController implements Initializable {
 		addSongDialog.scene = new Scene(loader.load())
 		soundDialogController = loader.controller
 		soundDialogController.songList = songList
-		
+
 		loader = new FXMLLoader(
 			getClass().getResource("OutputSelector.fxml")
 		)
@@ -96,14 +99,18 @@ class SoundBoardController implements Initializable {
 		outputSelectorDialog.scene = new Scene(loader.load())
 		outputSelectorController = loader.controller
 		outputSelectorController.init(sManager)
-		
+
 		var logger = Logger.getLogger(GlobalScreen.getPackage().getName());
-        logger.setLevel(Level.OFF);
+		logger.setLevel(Level.OFF);
 		keyHandler = new KeyHandler(songList, sManager)
 		GlobalScreen.registerNativeHook()
 		GlobalScreen.addNativeKeyListener(keyHandler)
 
-
+		slider.valueProperty.addListener(new ChangeListener<Number> {
+			override changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+				TinySound.setGlobalVolume(arg2.doubleValue)
+			}
+		})
 	}
 
 	@FXML def addSongHandle() {
@@ -118,7 +125,7 @@ class SoundBoardController implements Initializable {
 			addSongDialog.show()
 		}
 	}
-	
+
 	@FXML def deleteSongHandle() {
 		if (currentSelectionSong != null) {
 			songList.remove(currentSelectionSong)
@@ -128,18 +135,18 @@ class SoundBoardController implements Initializable {
 	def onTableDoubleClick() {
 		editSongHandle()
 	}
-	
+
 	@FXML def editOutput() {
 		outputSelectorDialog.show()
 	}
-	
+
 	@FXML def save() {
 		val fos = new FileOutputStream("list.dat")
 		val oos = new ObjectOutputStream(fos)
 		oos.writeObject(songList.toArray())
 		oos.close()
 	}
-	
+
 	@FXML def load() {
 		songList.clear()
 		val FileInputStream fis = try {
@@ -148,10 +155,10 @@ class SoundBoardController implements Initializable {
 			new Alert(AlertType.ERROR, "Save file does not exist").show()
 			return
 		}
-			
+
 		val ois = new ObjectInputStream(fis)
 		val Object[] list = ois.readObject() as Object[]
-		list.forEach[obj |
+		list.forEach [ obj |
 			val s = obj as Song
 			songList.add(s)
 		]
