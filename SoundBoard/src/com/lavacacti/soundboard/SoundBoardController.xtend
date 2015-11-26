@@ -88,7 +88,9 @@ class SoundBoardController implements Initializable {
 			getClass().getResource("SongDialog.fxml")
 		)
 		addSongDialog = new Stage()
+		addSongDialog.resizable = false
 		addSongDialog.scene = new Scene(loader.load())
+		addSongDialog.sizeToScene()
 		soundDialogController = loader.controller
 		soundDialogController.songList = songList
 
@@ -96,7 +98,9 @@ class SoundBoardController implements Initializable {
 			getClass().getResource("OutputSelector.fxml")
 		)
 		outputSelectorDialog = new Stage()
+		outputSelectorDialog.resizable = false
 		outputSelectorDialog.scene = new Scene(loader.load())
+		outputSelectorDialog.sizeToScene()
 		outputSelectorController = loader.controller
 		outputSelectorController.init(sManager)
 
